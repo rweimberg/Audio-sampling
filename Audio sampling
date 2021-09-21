@@ -1,0 +1,41 @@
+# import modules and packages
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from glob import glob
+
+instalar librosa 
+import librosa as lr
+
+# set directory for source files
+
+data_dir= './heartbeat-sounds/set-a'                                              ###directorio de donde vamos a leer nuestros arichivos
+audio_files = glob(data_dir + '/*wav')                                            ###glob es una isntruccion, lee todos los archivos en
+
+# read in the first audio file, create the time array(timeline)
+
+audio, sfreq = lr.load(audio_files[0])                                            ###llamamos a lr librosa para leer el archivo de audio
+time = np.arange(0,len(audio))/sfreq                                              ###numpay para para crear un arreglo 
+
+# plot audio over time
+
+fig, ax = plt.subplots()
+ax.plot(time, audio)
+ax.set(xlabel = 'Time (s)', ylabel='Sound Amplitude')
+plt.show()
+
+# time
+# perform the reading through all the audio files
+
+for file in range(0, len(audio_files), 1):
+
+  # read in the first audio file, create the time array (timeline)
+  audio, sfreq = lr.load(audio_files[file])
+  time = np.arange(0, len(audio)) / sfreq
+  
+  # plot audio over time
+  fig, ax = plt.subplots()
+  ax.plot(time, audio)
+  ax.set(xlabel = 'Time (s)', ylabel = 'Sound Amplitud')
+  plt.show()
